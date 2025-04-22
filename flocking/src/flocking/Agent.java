@@ -61,12 +61,56 @@ public class Agent implements Steppable {
 	public void aggregate(Environment state) {
 		if (state.random.nextBoolean(state.active)) {
 			Bag neighbors = state.sparseSpace.getMooreNeighbors(x, y, state.searchRadius, state.sparseSpace.TOROIDAL, true);
-			dirx = decidex(state, neighbors);
-			diry = decidey(state, neighbors);
+			dirx = ag_decidex(state, neighbors);
+			diry = ag_decidey(state, neighbors);
 			placeAgent(state);
 		}
 	}
 
+	public int ag_decidex(Environment state, Bag neighbors) {
+		int posx = 0, negx = 0;
+		for(int i = 0;i<neighbors.numObjs;i++) {
+			Agent a = (Agent)neighbors.objs[i];
+			if(a.x > this.x) {
+				posx++;
+			}
+			else if (a.x < this.x) {
+				negx++;
+			}
+		}
+		if(posx > negx) {
+			return 1;
+		}
+		else if(negx > posx) {
+			return -1;
+		}
+		else {
+			return state.random.nextInt(3)-1;
+		}
+	}
+	
+	public int ag_decidey(Environment state, Bag neighbors) {
+		int posy = 0, negy = 0;
+		for(int i = 0;i<neighbors.numObjs;i++) {
+			Agent a = (Agent)neighbors.objs[i];
+			if(a.y > this.y) {
+				posy++;
+			}
+			else if (a.y < this.y) {
+				negy++;
+			}
+		}
+		if(posy > negy) {
+			return 1;
+		}
+		else if(negy > posy) {
+			return -1;
+		}
+		else {
+			return state.random.nextInt(3)-1;
+		}
+	}
+	
 	public int decidey(Environment state, Bag neighbors) {
 		int a = 0, b = 0, c = 0; // num neighbors going: -1, 0, 1 respectively
 		for (int i = 0; i < neighbors.numObjs; i++) {
