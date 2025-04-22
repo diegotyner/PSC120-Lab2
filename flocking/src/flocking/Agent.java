@@ -5,20 +5,10 @@ import sim.engine.Steppable;
 import sim.util.Bag;
 
 public class Agent implements Steppable {
-	double flock;
 	int x; // x location in space
 	int y; // y location in space
 	int dirx; // direction of movement along the x axis
 	int diry; // direction of movement along the y axis
-
-	public Agent(double flock, int x, int y, int dirx, int diry) {
-		super();
-		this.flock = flock;
-		this.x = x;
-		this.y = y;
-		this.dirx = dirx;
-		this.diry = diry;
-	}
 
 	public Agent(int x, int y, int dirx, int diry) {
 		super();
@@ -209,7 +199,7 @@ public class Agent implements Steppable {
 		if (randNum <= e.aggregate) {
 			aggregate(e);
 		}
-		else if ( randNum <= (e.aggregate + flock) ) { 
+		else if ( randNum <= (e.aggregate + e.flock) ) { 
 			flock(e);
 		} else {
 			move(e);
