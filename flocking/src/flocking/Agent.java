@@ -123,15 +123,15 @@ public class Agent implements Steppable {
 				return 1;
 		if (b == c)
 			if (b > a)
-				if (state.random.nextBoolean(0.5))
-					return -1;
-				else
-					return 1;
+				return state.random.nextInt(2);
 			else
 				return 0;
 		if (a == c)
 			if (a > b)
-				return state.random.nextInt(2);
+				if (state.random.nextBoolean(0.5))
+					return -1;
+				else
+					return 1;
 			else
 				return -1;
 		else if ((a > b) && (a > c))
@@ -164,15 +164,15 @@ public class Agent implements Steppable {
 				return 1;
 		if (b == c)
 			if (b > a)
-				if (state.random.nextBoolean(0.5))
-					return -1;
-				else
-					return 1;
+				return state.random.nextInt(2);
 			else
 				return 0;
 		if (a == c)
 			if (a > b)
-				return state.random.nextInt(2);
+				if (state.random.nextBoolean(0.5))
+					return -1;
+				else
+					return 1;
 			else
 				return -1;
 		else if ((a > b) && (a > c))
